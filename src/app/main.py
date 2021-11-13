@@ -50,15 +50,15 @@ def get_score():
     return jsonify(cpf=dados['cpf'], score=score, status=status)
 
 # Nova rota - recebendo CPF
-@app.route('/score/<cpf>')
+@app.route('/healthcare/<cpf>')
 @basic_auth.required
 def show_cpf(cpf):
-    return 'Recebendo dados\nCPF: %s'%cpf
+    return 'Recebendo dados do Paciente\nCPF: %s'%cpf
 
 # Rota padrão
 @app.route('/')
 def home():
-    return 'API de predição de credito'
+    return 'API de Diagnostico de Diabetes'
 
 # Subir a API
 app.run(debug=True, host='0.0.0.0')
