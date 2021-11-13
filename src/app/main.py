@@ -92,7 +92,7 @@ def get_health_status():
     data = request.get_json()
 
     # Load data
-    payload = np.array([data[column] for column in columns]])
+    payload = np.array([data[column] for column in columns])
     payload = xgb.DMatrix([payload], feature_names=columns)
 
     # Fazer predição
