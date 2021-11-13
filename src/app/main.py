@@ -79,7 +79,7 @@ columns = ['age', 'bmi', 'elective_surgery', 'ethnicity', 'gender', 'height',
        'lymphoma', 'solid_tumor_with_metastasis']
 
 # Load trained model
-model = pickle.load(open('models/xgboost_model.pkl', 'rb'))
+model = pickle.load(open('../../models/xgboost_model.pkl', 'rb'))
 
 # Rota de predição de scores
 @app.route('/score/', methods=['POST'])
