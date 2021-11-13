@@ -78,11 +78,8 @@ columns = ['age', 'bmi', 'elective_surgery', 'ethnicity', 'gender', 'height',
        'cirrhosis', 'hepatic_failure', 'immunosuppression', 'leukemia',
        'lymphoma', 'solid_tumor_with_metastasis']
 
-def load_model(file_name = 'xgboost_undersampling.pkl'):
-    return pickle.load(open(file_name, "rb"))
-
-# Carregar modelo treinado
-modelo = load_model('models/xgboost_undersampling.pkl')
+# Load trained model
+model = pickle.load(open('models/xgboost_model.pkl', 'rb'))
 
 # Rota de predição de scores
 @app.route('/score/', methods=['POST'])
@@ -94,7 +91,7 @@ def get_score():
     payload = np.array([dados[col] for col in columns])
     # Fazer predição
     payload = xgb.DMatrix([payload], feature_names=columns)
-    score = np.float64(modelo.predict(payload)[0])
+    score = np.float64(model.predict(payload)[0])
     status = 'APROVADO'
     if score <= 0.3:
         status = 'REPROVADO'
