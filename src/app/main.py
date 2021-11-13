@@ -81,26 +81,26 @@ columns = ['age', 'bmi', 'elective_surgery', 'ethnicity', 'gender', 'height',
 def load_model(file_name = 'xgboost_undersampling.pkl'):
     return pickle.load(open(file_name, "rb"))
 
-# Carregar modelo treinado
-modelo = load_model('models/xgboost_undersampling.pkl')
+# Load trained model
+model = load_model('models/xgboost_undersampling.pkl')
 
-# Rota de predição de scores
-@app.route('/score/', methods=['POST'])
+# Route to predict health status
+@app.route('/status/', methods=['POST'])
 @basic_auth.required
-def get_score():
-    # Pegar o JSON da requisição
-    dados = request.get_json()
-    # Garantir a ordem das colunas
-    payload = np.array([dados[col] for col in columns])
+def get_health_status():
+    # Get JSON from request
+    data = request.get_json()
+
+    # Load data
+    payload = np.array([[data[column] for column in columns]])
+
     # Fazer predição
-    payload = xgb.DMatrix([payload], feature_names=columns)
-    score = np.float64(modelo.predict(payload)[0])
-    status = 'APROVADO'
-    if score <= 0.3:
-        status = 'REPROVADO'
-    elif score <= 0.6: 
-        status = 'MESA DE AVALIACAO'
-    return jsonify(cpf=dados['cpf'], score=score, status=status)
+    prediction = int(model.predict(payload)[0])
+    status = 'Saudável'
+    if prediction == 1:
+        status = 'Diabético'
+
+    return jsonify(status=status)
 
 # Nova rota - recebendo CPF
 @app.route('/healthcare/<cpf>')
