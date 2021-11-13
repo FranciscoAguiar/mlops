@@ -83,7 +83,7 @@ def load_model(file_name = 'xgboost_model.pkl'):
 
 # Load trained model
 model = xgb.Booster()
-model.load_model('xboost_model.model')
+model.load_model('models/xboost_model.model')
 
 # Route to predict health status
 @app.route('/status/', methods=['POST'])
