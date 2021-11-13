@@ -82,7 +82,8 @@ def load_model(file_name = 'xgboost_model.pkl'):
     return pickle.load(open(file_name, "rb"))
 
 # Load trained model
-model = load_model('models/xgboost_model.pkl')
+model = xgb.Booster()
+model.load_model('xboost_model.model')
 
 # Route to predict health status
 @app.route('/status/', methods=['POST'])
