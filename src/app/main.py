@@ -82,7 +82,7 @@ def load_model(file_name = 'xgboost_model.pkl'):
     return pickle.load(open(file_name, "rb"))
 
 # Load trained model
-model = xgb.load_model('../../models/xgboost_model.txt')
+model = load_model('models/xgboost_model.txt')
 
 # Route to predict health status
 @app.route('/status/', methods=['POST'])
@@ -92,7 +92,8 @@ def get_health_status():
     data = request.get_json()
 
     # Load data
-    payload = np.array([[data[column] for column in columns]])
+    payload = np.array([data[column] for column in columns]])
+    payload = xgb.DMatrix([payload], feature_names=columns)
 
     # Fazer predição
     prediction = int(model.predict(payload)[0])
