@@ -78,7 +78,7 @@ columns = ['age', 'bmi', 'elective_surgery', 'ethnicity', 'gender', 'height',
        'cirrhosis', 'hepatic_failure', 'immunosuppression', 'leukemia',
        'lymphoma', 'solid_tumor_with_metastasis']
 
-def load_model(file_name = 'xgboost_undersampling.pkl'):
+def load_model(file_name = 'xgboost_model.pkl'):
     return pickle.load(open(file_name, "rb"))
 
 # Load trained model
