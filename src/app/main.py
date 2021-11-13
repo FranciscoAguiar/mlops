@@ -9,7 +9,7 @@ import os
 from flask import Flask, request, jsonify
 from flask_basicauth import BasicAuth
 
-# Criação de uma app
+
 app = Flask(__name__)
 app.config['BASIC_AUTH_USERNAME'] = os.environ.get('BASIC_AUTH_USERNAME')
 app.config['BASIC_AUTH_PASSWORD'] = os.environ.get('BASIC_AUTH_PASSWORD')
