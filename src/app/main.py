@@ -82,7 +82,7 @@ def load_model(file_name = 'xgboost_undersampling.pkl'):
     return pickle.load(open(file_name, "rb"))
 
 # Load trained model
-model = load_model('models/xgboost_model.pkl')
+model = load_model('../../models/xgboost_model.pkl')
 
 # Route to predict health status
 @app.route('/status/', methods=['POST'])
