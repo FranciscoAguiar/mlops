@@ -102,7 +102,7 @@ def get_health_status():
 
     return jsonify(status=status)
 
-# Nova rota - recebendo CPF
+# Nova rota - 
 @app.route('/healthcare/<cpf>')
 @basic_auth.required
 def show_cpf(cpf):
